@@ -9,8 +9,9 @@ int main(int argc, char *argv[]) {
   game_data   game;
   game.was_initialized = 0;
   // Load the previous game state from the JSON file
-  load_game_state(&playerA, &playerB, &game);
-
+  if (load_game_state(&playerA, &playerB, &game) == -1) {
+    return 0;
+  }
   // Process command-line arguments (e.g., "take_camel", "sell_goods", "draw_from_deck")
   process_arguments(&playerA, &playerB, &game, argc, argv);
 

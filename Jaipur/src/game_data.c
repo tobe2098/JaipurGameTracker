@@ -198,7 +198,7 @@ int load_game_state(player_data *playerA, player_data *playerB, game_data *game)
                            &playerB->no_bonus_tokens, &playerB->no_goods_tokens, &playerB->camels, &playerB->points, &playerB->seals,
                            &game->turn_of, &game->diamond_ptr, &game->gold_ptr, &game->silver_ptr, &game->spice_ptr, &game->cloth_ptr,
                            &game->leather_ptr, &game->rnd_seed, &game->bonus_3_ptr, &game->bonus_4_ptr, &game->bonus_5_ptr);
-    printf("Items read: %d\n", itemsRead);
+    // printf("Items read: %d\n", itemsRead);
     free(buffer);
     set_seed(game);
     if (is_round_over(game)) {
@@ -209,6 +209,10 @@ int load_game_state(player_data *playerA, player_data *playerB, game_data *game)
       game_over(playerA, playerB);
       initialize_game(playerA, playerB, game);
       game->was_initialized = 1;
+    }
+    if (itemsRead < 21) {
+      printf("Data was partially corrupted, use `--reset` to restart the game or manually correct the json.");
+      return -1;
     }
   } else {
     // Initialize default game state if no save file exists
