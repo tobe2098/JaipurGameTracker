@@ -1,30 +1,30 @@
 #ifndef GAME_CONSTANTS_JAIPUR
 #define GAME_CONSTANTS_JAIPUR
 
-const int diamond_tokens[] = { 7, 7, 5, 5, 5 };
-const int diamond_t_size   = 5;
-const int gold_tokens[]    = { 6, 6, 5, 5, 5 };
-const int gold_t_size      = 5;
-const int silver_tokens[]  = { 5, 5, 5, 5, 5 };
-const int silver_t_size    = 5;
+extern const int diamond_tokens[];
+extern const int diamond_t_size;
+extern const int gold_tokens[];
+extern const int gold_t_size;
+extern const int silver_tokens[];
+extern const int silver_t_size;
 
-const int spice_tokens[]   = { 5, 3, 3, 2, 2, 1, 1 };
-const int spice_t_size     = 7;
-const int cloth_tokens[]   = { 5, 3, 3, 2, 2, 1, 1 };
-const int cloth_t_size     = 7;
-const int leather_tokens[] = { 4, 3, 2, 1, 1, 1, 1, 1, 1 };
-const int leather_t_size   = 9;
+extern const int spice_tokens[];
+extern const int spice_t_size;
+extern const int cloth_tokens[];
+extern const int cloth_t_size;
+extern const int leather_tokens[];
+extern const int leather_t_size;
 
-const int finished_goods_limit = 3;
+extern const int finished_goods_limit;
 
-const int bonus_template_3[] = { 3, 3, 2, 2, 1, 1 };
-const int bonus_template_4[] = { 6, 6, 5, 5, 4, 4 };
-const int bonus_template_5[] = { 9, 9, 8, 8, 7, 7 };
+extern const int bonus_template_3[];
+extern const int bonus_template_4[];
+extern const int bonus_template_5[];
 
-const int max_bonus_tokens = 6;
+extern const int max_bonus_tokens;
 
-const int camel_token  = 5;
-const int camels_total = 11;
+extern const int camel_token;
+extern const int camels_total;
 
-const int winning_seals = 2;
+extern const int winning_seals;
 #endif

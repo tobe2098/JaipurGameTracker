@@ -18,6 +18,8 @@ typedef struct {
 } player_data;
 
 typedef struct {
+    int was_initialized;
+
     char turn_of;
 
     int diamond_ptr;
@@ -50,9 +52,9 @@ void save_game_state(const player_data *playerA, const player_data *playerB, con
 void print_help();
 void process_arguments(player_data *playerA, player_data *playerB, game_data *game, int argc, char *argv[]);
 void card_sale(player_data *player, game_data *game, char card_type[], int no_cards);
-int  is_game_over(player_data *playerA, player_data *playerB, game_data *game);
-int  is_round_over(player_data *playerA, player_data *playerB, game_data *game);
-void game_over(player_data *playerA, player_data *playerB, game_data *game);
+int  is_game_over(player_data *playerA, player_data *playerB);
+int  is_round_over(game_data *game);
+void game_over(player_data *playerA, player_data *playerB);
 void round_over(player_data *playerA, player_data *playerB, game_data *game);
 
 #endif

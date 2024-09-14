@@ -50,7 +50,7 @@ void initialize_game(player_data *playerA, player_data *playerB, game_data *game
     } else {
       char *endptr;
       game->rnd_seed = (int)(strtol(input, &endptr, 10) & INT_MAX);
-      printf("The following input was ignored: %s\n", endptr);
+      // printf("The following input was ignored: %s\n", endptr);
     }
     printf("Seed set to: %i\n", game->rnd_seed);
   } else {
@@ -105,8 +105,8 @@ void initialize_round(player_data *playerA, player_data *playerB, game_data *gam
 void print_game_state(player_data *playerA, player_data *playerB, game_data *game) {
   printf("Player A-> Points:%i, Camels:%i, Seals of excellence:%i, Bonus tokens:%i, Goods tokens:%i\n", playerA->points, playerA->camels,
          playerA->seals, playerA->no_bonus_tokens, playerA->no_goods_tokens);
-  printf("Player B-> Points:%i, Camels:%i, Seals of excellence:%i, Bonus tokens:%i, Goods tokens:%i\n", playerA->points, playerA->camels,
-         playerA->seals, playerA->no_bonus_tokens, playerB->no_goods_tokens);
+  printf("Player B-> Points:%i, Camels:%i, Seals of excellence:%i, Bonus tokens:%i, Goods tokens:%i\n", playerB->points, playerB->camels,
+         playerB->seals, playerB->no_bonus_tokens, playerB->no_goods_tokens);
 
   print_array_goods("diamonds", diamond_tokens, diamond_t_size, game->diamond_ptr);
   print_array_goods("gold", gold_tokens, gold_t_size, game->gold_ptr);
@@ -176,32 +176,44 @@ int load_game_state(player_data *playerA, player_data *playerB, game_data *game)
     fread(buffer, 1, file_size, file);
     buffer[file_size] = '\0';
     fclose(file);
-
+    // printf("Buffer 1 content:\n%s\n", buffer);
     // Parse the JSON-like ure
-    sscanf(buffer,
-           "{\"playerA\": {\"bonus tokens\": %i,\"goods tokens\": %i, \"camels\": %i, \"points\": %i, \"seals\": %i}, "
-           "\"playerB\": {\"bonus tokens\": %i,\"goods tokens\": %i, \"camels\": %i, \"points\": %i, \"seals\": %i}, "
-           "\"turn_of\": %c,\"diamond_ptr\": %i, \"gold_ptr\": %i, \"silver_ptr\": %i, \"spice_ptr\": %i, "
-           "\"cloth_ptr\": %i, \"leather_ptr\": %i, \"rnd_seed\": %i, "
-           "\"bonus_3_ptr\": %i, \"bonus_4_ptr\": %i, \"bonus_5_ptr\": %i}",
-           &playerA->no_bonus_tokens, &playerA->no_goods_tokens, &playerA->camels, &playerA->points, &playerA->seals,
-           &playerB->no_bonus_tokens, &playerB->no_goods_tokens, &playerB->camels, &playerB->points, &playerB->seals, &game->turn_of,
-           &game->diamond_ptr, &game->gold_ptr, &game->silver_ptr, &game->spice_ptr, &game->cloth_ptr, &game->leather_ptr, &game->rnd_seed,
-           &game->bonus_3_ptr, &game->bonus_4_ptr, &game->bonus_5_ptr);
-
+    int itemsRead = sscanf(buffer,
+                           "{\n"
+                           "  \"playerA\": {\"bonus tokens\": %i,\"goods tokens\": %i, \"camels\": %i, \"points\": %i, \"seals\": %i},\n"
+                           "  \"playerB\": {\"bonus tokens\": %i,\"goods tokens\": %i, \"camels\": %i, \"points\": %i, \"seals\": %i},\n"
+                           "  \"turn_of\": \"%c\",\n"
+                           "  \"diamond_ptr\": %i,\n"
+                           "  \"gold_ptr\": %i,\n"
+                           "  \"silver_ptr\": %i,\n"
+                           "  \"spice_ptr\": %i,\n"
+                           "  \"cloth_ptr\": %i,\n"
+                           "  \"leather_ptr\": %i,\n"
+                           "  \"rnd_seed\": %i,\n"
+                           "  \"bonus_3_ptr\": %i,\n"
+                           "  \"bonus_4_ptr\": %i,\n"
+                           "  \"bonus_5_ptr\": %i\n"
+                           "}\n",
+                           &(playerA->no_bonus_tokens), &playerA->no_goods_tokens, &playerA->camels, &playerA->points, &playerA->seals,
+                           &playerB->no_bonus_tokens, &playerB->no_goods_tokens, &playerB->camels, &playerB->points, &playerB->seals,
+                           &game->turn_of, &game->diamond_ptr, &game->gold_ptr, &game->silver_ptr, &game->spice_ptr, &game->cloth_ptr,
+                           &game->leather_ptr, &game->rnd_seed, &game->bonus_3_ptr, &game->bonus_4_ptr, &game->bonus_5_ptr);
+    printf("Items read: %d\n", itemsRead);
     free(buffer);
     set_seed(game);
-    if (is_round_over(playerA, playerB, game)) {
+    if (is_round_over(game)) {
       round_over(playerA, playerB, game);
       initialize_round(playerA, playerB, game);
     }
-    if (is_game_over(playerA, playerB, game)) {
-      game_over(playerA, playerB, game);
+    if (is_game_over(playerA, playerB)) {
+      game_over(playerA, playerB);
       initialize_game(playerA, playerB, game);
+      game->was_initialized = 1;
     }
   } else {
     // Initialize default game state if no save file exists
     initialize_game(playerA, playerB, game);
+    game->was_initialized = 1;
   }
   set_finished_resources(game);
   if (check_data_integrity(playerA, playerB, game) == -1) {
@@ -223,7 +235,7 @@ void save_game_state(const player_data *playerA, const player_data *playerB, con
           playerA->no_bonus_tokens, playerA->no_goods_tokens, playerA->camels, playerA->points, playerA->seals);
   fprintf(file, "  \"playerB\": {\"bonus tokens\": %i,\"goods tokens\": %i, \"camels\": %i, \"points\": %i, \"seals\": %i},\n",
           playerB->no_bonus_tokens, playerB->no_goods_tokens, playerB->camels, playerB->points, playerB->seals);
-  fprintf(file, "  \"turn_of\": %c,\n", game->turn_of);
+  fprintf(file, "  \"turn_of\": \"%c\",\n", game->turn_of);
   fprintf(file, "  \"diamond_ptr\": %i,\n", game->diamond_ptr);
   fprintf(file, "  \"gold_ptr\": %i,\n", game->gold_ptr);
   fprintf(file, "  \"silver_ptr\": %i,\n", game->silver_ptr);
@@ -256,6 +268,7 @@ void print_help() {
 }
 void process_arguments(player_data *playerA, player_data *playerB, game_data *game, int argc, char *argv[]) {
   if (argc < 2) {
+    printf("Addresses A:%p B:%p\n", (void *)playerA, (void *)playerB);
     print_game_state(playerA, playerB, game);
     return;
   }
@@ -267,10 +280,14 @@ void process_arguments(player_data *playerA, player_data *playerB, game_data *ga
   } else if (game->turn_of == 'B') {
     curr_player = playerB;
   } else {
-    printf("Data is corrupted.\n");
-    initialize_game(playerA, playerB, game);
+    printf("Data is corrupted: player %c\n", game->turn_of);
+    if (game->was_initialized == 0) {
+      initialize_game(playerA, playerB, game);
+      game->was_initialized = 1;
+    }
     return;
   }
+  printf("Addresses A:%p B:%p, current:%p\n", (void *)playerA, (void *)playerB, (void *)curr_player);
 
   if (strncmp(argv[1], "--camels", 8) == 0) {
     if (argc < 3) {
@@ -297,8 +314,9 @@ void process_arguments(player_data *playerA, player_data *playerB, game_data *ga
     turn_happened += 1;
   } else if (strncmp(argv[1], "--state", 7) == 0) {
     print_game_state(playerA, playerB, game);
-  } else if (strncmp(argv[1], "--reset", 7) == 0) {
+  } else if (strncmp(argv[1], "--reset", 7) == 0 && game->was_initialized == 0) {
     initialize_game(playerA, playerB, game);
+    game->was_initialized = 1;
   } else if (strncmp(argv[1], "--round", 7) == 0) {
     round_over_bool = 1;
   } else if (strncmp(argv[1], "--help", 6) == 0) {
@@ -309,56 +327,57 @@ void process_arguments(player_data *playerA, player_data *playerB, game_data *ga
   if (turn_happened) {
     game->turn_of = (((game->turn_of - 'A') + 1) & 1) + 'A';
   }
-  if (round_over_bool || is_round_over(playerA, playerB, game)) {
+  if (round_over_bool || is_round_over(game)) {
     round_over(playerA, playerB, game);
     initialize_round(playerA, playerB, game);
   } else {
-    print_game_state(playerA, playerA, game);
+    print_game_state(playerA, playerB, game);
   }
-  if (is_game_over(playerA, playerB, game)) {
-    game_over(playerA, playerB, game);
+  if (is_game_over(playerA, playerB)) {
+    game_over(playerA, playerB);
     initialize_game(playerA, playerB, game);
+    game->was_initialized = 1;
   }
 }
 
 void card_sale(player_data *player, game_data *game, char card_type[], int no_cards) {
   if (strncmp(card_type, "diamonds", 8) == 0) {
-    int end = max(no_cards + game->diamond_ptr, diamond_t_size);
+    int end = min(no_cards + game->diamond_ptr, diamond_t_size);
     for (int i = game->diamond_ptr; i < end; i++) {
       player->points += diamond_tokens[i];
     }
     player->no_goods_tokens += end - game->diamond_ptr;
     game->diamond_ptr = end;
   } else if (strncmp(card_type, "gold", 4) == 0) {
-    int end = max(no_cards + game->gold_ptr, gold_t_size);
+    int end = min(no_cards + game->gold_ptr, gold_t_size);
     for (int i = game->gold_ptr; i < end; i++) {
       player->points += gold_tokens[i];
     }
     player->no_goods_tokens += end - game->gold_ptr;
     game->gold_ptr = end;
   } else if (strncmp(card_type, "silver", 6) == 0) {
-    int end = max(no_cards + game->silver_ptr, silver_t_size);
+    int end = min(no_cards + game->silver_ptr, silver_t_size);
     for (int i = game->silver_ptr; i < end; i++) {
       player->points += silver_tokens[i];
     }
     player->no_goods_tokens += end - game->silver_ptr;
     game->silver_ptr = end;
   } else if (strncmp(card_type, "spice", 5) == 0) {
-    int end = max(no_cards + game->spice_ptr, spice_t_size);
+    int end = min(no_cards + game->spice_ptr, spice_t_size);
     for (int i = game->spice_ptr; i < end; i++) {
       player->points += spice_tokens[i];
     }
     player->no_goods_tokens += end - game->spice_ptr;
     game->spice_ptr = end;
   } else if (strncmp(card_type, "cloth", 5) == 0) {
-    int end = max(no_cards + game->cloth_ptr, cloth_t_size);
+    int end = min(no_cards + game->cloth_ptr, cloth_t_size);
     for (int i = game->cloth_ptr; i < end; i++) {
       player->points += cloth_tokens[i];
     }
     player->no_goods_tokens += end - game->cloth_ptr;
     game->cloth_ptr = end;
   } else if (strncmp(card_type, "leather", 7) == 0) {
-    int end = max(no_cards + game->leather_ptr, leather_t_size);
+    int end = min(no_cards + game->leather_ptr, leather_t_size);
     for (int i = game->leather_ptr; i < end; i++) {
       player->points += leather_tokens[i];
     }
@@ -380,7 +399,7 @@ void card_sale(player_data *player, game_data *game, char card_type[], int no_ca
   }
 }
 
-int is_game_over(player_data *playerA, player_data *playerB, game_data *game) {
+int is_game_over(player_data *playerA, player_data *playerB) {
   if (playerA->seals == winning_seals || playerB->seals == winning_seals) {
     return 1;
   } else {
@@ -388,7 +407,7 @@ int is_game_over(player_data *playerA, player_data *playerB, game_data *game) {
   }
 }
 
-int is_round_over(player_data *playerA, player_data *playerB, game_data *game) {
+int is_round_over(game_data *game) {
   set_finished_resources(game);
   if (game->finished_counter == finished_goods_limit) {
     return 1;
@@ -397,7 +416,7 @@ int is_round_over(player_data *playerA, player_data *playerB, game_data *game) {
   }
 }
 
-void game_over(player_data *playerA, player_data *playerB, game_data *game) {
+void game_over(player_data *playerA, player_data *playerB) {
   if (playerA->seals == winning_seals) {
     print_winning_trophy('A');
   } else if (playerB->seals == winning_seals) {

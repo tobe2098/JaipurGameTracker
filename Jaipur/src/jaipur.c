@@ -7,7 +7,7 @@ int main(int argc, char *argv[]) {
   }
   player_data playerA, playerB;
   game_data   game;
-
+  game.was_initialized = 0;
   // Load the previous game state from the JSON file
   load_game_state(&playerA, &playerB, &game);
 
