@@ -19,5 +19,8 @@ const int bonus_template_3[] = { 3, 3, 2, 2, 1, 1 };
 const int bonus_template_4[] = { 6, 6, 5, 5, 4, 4 };
 const int bonus_template_5[] = { 9, 9, 8, 8, 7, 7 };
 
-const int camel_token = 5;
+const int max_bonus_tokens = 6;
+
+const int camel_token  = 5;
+const int camels_total = 11;
 #endif
