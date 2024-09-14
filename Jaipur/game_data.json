@@ -1,0 +1,26 @@
+{
+    "player1":{
+        "tokens":0,
+        "camels":0,
+        "points":0,
+        "seals":0
+    },
+    "player2":{
+        "tokens":0,
+        "camels":0,
+        "points":0,
+        "seals":0
+    },
+    "diamond_ptr":0,
+    "gold_ptr":0,
+    "silver_ptr":0,
+    "spice_ptr":0,
+    "cloth_ptr":0,
+    "leather_ptr":0,
+
+    "rnd_seed":42,
+
+    "bonus_3_ptr":0,
+    "bonus_4_ptr":0,
+    "bonus_5_ptr":0
+}
