@@ -211,7 +211,8 @@ int load_game_state(player_data *playerA, player_data *playerB, game_data *game)
       game->was_initialized = 1;
     }
     if (itemsRead < 21) {
-      printf("Data was partially corrupted, use `--reset` to restart the game or manually correct the json.");
+      printf("Data was partially corrupted, use `--reset` to restart the game or manually correct the json.\n");
+      printf("Input into the template json file your data manually as an alternative.\n");
       return -1;
     }
   } else {
