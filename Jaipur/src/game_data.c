@@ -50,7 +50,7 @@ void initialize_game(struct player_data *playerA, struct player_data *playerB, s
       game->rnd_seed = (int)(strtol(input, &endptr, 10) & INT_MAX);
       printf("The following input was ignored: %s\n", endptr);
     }
-    printf("Seed set to: %d\n", game->rnd_seed);
+    printf("Seed set to: %i\n", game->rnd_seed);
   } else {
     game->rnd_seed = 42;  // Default seed if no input
   }
@@ -89,7 +89,7 @@ void initialize_round(struct player_data *playerA, struct player_data *playerB, 
       game->rnd_seed = (int)(strtol(input, &endptr, 10) & INT_MAX);
       printf("The following input was ignored: %s\n", endptr);
     }
-    printf("Seed set to: %d\n", game->rnd_seed);
+    printf("Seed set to: %i\n", game->rnd_seed);
   } else {
     game->rnd_seed = 42;  // Default seed if no input
   }
@@ -97,7 +97,7 @@ void initialize_round(struct player_data *playerA, struct player_data *playerB, 
   fprintf("Player %c starts this game.\n", game->turn_of);
 }
 void print_game_state(struct player_data *playerA, struct player_data *playerB, struct game_data *game) {
-  printf("Player A->Points:%i,Camels:%i,Tokens:%i");
+  printf("Player A->Points:%i,Camels:%i,Bonus tokens:%i");
   printf("Player A:");
   printf("Player A:");
   printf("Player A:");
@@ -161,11 +161,11 @@ int load_game_state(struct player_data *playerA, struct player_data *playerB, st
 
     // Parse the JSON-like structure
     sscanf(buffer,
-           "{\"playerA\": {\"bonus tokens\": %d, \"camels\": %d, \"points\": %d, \"seals\": %d}, "
-           "\"playerB\": {\"bonus tokens\": %d, \"camels\": %d, \"points\": %d, \"seals\": %d}, "
-           "\"turn_of\": %c,\"diamond_ptr\": %d, \"gold_ptr\": %d, \"silver_ptr\": %d, \"spice_ptr\": %d, "
-           "\"cloth_ptr\": %d, \"leather_ptr\": %d, \"rnd_seed\": %d, "
-           "\"bonus_3_ptr\": %d, \"bonus_4_ptr\": %d, \"bonus_5_ptr\": %d}",
+           "{\"playerA\": {\"bonus tokens\": %i, \"camels\": %i, \"points\": %i, \"seals\": %i}, "
+           "\"playerB\": {\"bonus tokens\": %i, \"camels\": %i, \"points\": %i, \"seals\": %i}, "
+           "\"turn_of\": %c,\"diamond_ptr\": %i, \"gold_ptr\": %i, \"silver_ptr\": %i, \"spice_ptr\": %i, "
+           "\"cloth_ptr\": %i, \"leather_ptr\": %i, \"rnd_seed\": %i, "
+           "\"bonus_3_ptr\": %i, \"bonus_4_ptr\": %i, \"bonus_5_ptr\": %i}",
            &playerA->no_bonus_tokens, &playerA->camels, &playerA->points, &playerA->seals, &playerB->no_bonus_tokens, &playerB->camels,
            &playerB->points, &playerB->seals, &game->turn_of, &game->diamond_ptr, &game->gold_ptr, &game->silver_ptr, &game->spice_ptr,
            &game->cloth_ptr, &game->leather_ptr, &game->rnd_seed, &game->bonus_3_ptr, &game->bonus_4_ptr, &game->bonus_5_ptr);
@@ -200,21 +200,21 @@ void save_game_state(const struct player_data *playerA, const struct player_data
 
   // Write the JSON-like format for the game state
   fprintf(file, "{\n");
-  fprintf(file, "  \"playerA\": {\"bonus tokens\": %d, \"camels\": %d, \"points\": %d, \"seals\": %d},\n", playerA->no_bonus_tokens,
+  fprintf(file, "  \"playerA\": {\"bonus tokens\": %i, \"camels\": %i, \"points\": %i, \"seals\": %i},\n", playerA->no_bonus_tokens,
           playerA->camels, playerA->points, playerA->seals);
-  fprintf(file, "  \"playerB\": {\"bonus tokens\": %d, \"camels\": %d, \"points\": %d, \"seals\": %d},\n", playerB->no_bonus_tokens,
+  fprintf(file, "  \"playerB\": {\"bonus tokens\": %i, \"camels\": %i, \"points\": %i, \"seals\": %i},\n", playerB->no_bonus_tokens,
           playerB->camels, playerB->points, playerB->seals);
   fprintf(file, "  \"turn_of\": %c,\n", game->turn_of);
-  fprintf(file, "  \"diamond_ptr\": %d,\n", game->diamond_ptr);
-  fprintf(file, "  \"gold_ptr\": %d,\n", game->gold_ptr);
-  fprintf(file, "  \"silver_ptr\": %d,\n", game->silver_ptr);
-  fprintf(file, "  \"spice_ptr\": %d,\n", game->spice_ptr);
-  fprintf(file, "  \"cloth_ptr\": %d,\n", game->cloth_ptr);
-  fprintf(file, "  \"leather_ptr\": %d,\n", game->leather_ptr);
-  fprintf(file, "  \"rnd_seed\": %d,\n", game->rnd_seed);
-  fprintf(file, "  \"bonus_3_ptr\": %d,\n", game->bonus_3_ptr);
-  fprintf(file, "  \"bonus_4_ptr\": %d,\n", game->bonus_4_ptr);
-  fprintf(file, "  \"bonus_5_ptr\": %d\n", game->bonus_5_ptr);
+  fprintf(file, "  \"diamond_ptr\": %i,\n", game->diamond_ptr);
+  fprintf(file, "  \"gold_ptr\": %i,\n", game->gold_ptr);
+  fprintf(file, "  \"silver_ptr\": %i,\n", game->silver_ptr);
+  fprintf(file, "  \"spice_ptr\": %i,\n", game->spice_ptr);
+  fprintf(file, "  \"cloth_ptr\": %i,\n", game->cloth_ptr);
+  fprintf(file, "  \"leather_ptr\": %i,\n", game->leather_ptr);
+  fprintf(file, "  \"rnd_seed\": %i,\n", game->rnd_seed);
+  fprintf(file, "  \"bonus_3_ptr\": %i,\n", game->bonus_3_ptr);
+  fprintf(file, "  \"bonus_4_ptr\": %i,\n", game->bonus_4_ptr);
+  fprintf(file, "  \"bonus_5_ptr\": %i\n", game->bonus_5_ptr);
   fprintf(file, "}\n");
 
   fclose(file);
