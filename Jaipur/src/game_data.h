@@ -1,5 +1,10 @@
 #ifndef PLAYER_INFO_HEADER_JAIPUR
 #define PLAYER_INFO_HEADER_JAIPUR
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define SAVE_FILE "jaipur_game_state.json"
 
 typedef struct player_data {
     int no_tokens;
@@ -24,7 +29,8 @@ typedef struct game_data {
     int finished_counter;
 };
 
-void load_game_state(struct player_data *player1, struct player_data *player2, struct game_data *game);
-void save_game_state(const struct player_data *player1, const struct player_data *player2, const struct game_data *game);
+void load_game_state(struct player_data *playerA, struct player_data *playerB, struct game_data *game);
+void save_game_state(const struct player_data *playerA, const struct player_data *playerB, const struct game_data *game);
+void process_arguments(struct player_data *playerA, struct player_data *playerB, struct game_data *game, int argc, char *argv[]);
 
 #endif

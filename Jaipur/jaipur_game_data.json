@@ -1,11 +1,11 @@
 {
-    "player1":{
+    "playerA":{
         "tokens":0,
         "camels":0,
         "points":0,
         "seals":0
     },
-    "player2":{
+    "playerB":{
         "tokens":0,
         "camels":0,
         "points":0,
