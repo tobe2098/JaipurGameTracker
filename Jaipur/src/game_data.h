@@ -10,9 +10,9 @@
 #define SAVE_FILE "jaipur_game_state.json"
 
 typedef struct player_data {
-    int no_tokens;
-    int camels;
     int points;
+    int camels;
+    int no_bonus_tokens;
     int seals;
 };
 
@@ -43,8 +43,10 @@ void initialize_game(struct player_data *playerA, struct player_data *playerB, s
 void initialize_round(struct player_data *playerA, struct player_data *playerB, struct game_data *game);
 void print_game_state(struct player_data *playerA, struct player_data *playerB, struct game_data *game);
 int  check_data_integrity(struct player_data *playerA, struct player_data *playerB, struct game_data *game);
-void load_game_state(struct player_data *playerA, struct player_data *playerB, struct game_data *game);
+void set_finished_resources(struct game_data *game);
+int  load_game_state(struct player_data *playerA, struct player_data *playerB, struct game_data *game);
 void save_game_state(const struct player_data *playerA, const struct player_data *playerB, const struct game_data *game);
+void print_help();
 void process_arguments(struct player_data *playerA, struct player_data *playerB, struct game_data *game, int argc, char *argv[]);
 void card_sale(struct player_data *player, struct game_data *game, char card_type[], int no_cards);
 int  is_game_over(struct player_data *playerA, struct player_data *playerB, struct game_data *game);
