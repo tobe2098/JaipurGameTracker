@@ -1,12 +1,12 @@
 #include "game_data.h"
 
 int main(int argc, char *argv[]) {
-  if (argc == 2 && strncmp(argv[1], "--help", 6)) {
+  if (argc == 2 && strncmp(argv[1], "--help", 6) == 0) {
     print_help();
     return 0;
   }
-  struct player_data playerA, playerB;
-  struct game_data   game;
+  player_data playerA, playerB;
+  game_data   game;
 
   // Load the previous game state from the JSON file
   load_game_state(&playerA, &playerB, &game);

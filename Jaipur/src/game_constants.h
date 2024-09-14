@@ -15,6 +15,8 @@ const int cloth_t_size     = 7;
 const int leather_tokens[] = { 4, 3, 2, 1, 1, 1, 1, 1, 1 };
 const int leather_t_size   = 9;
 
+const int finished_goods_limit = 3;
+
 const int bonus_template_3[] = { 3, 3, 2, 2, 1, 1 };
 const int bonus_template_4[] = { 6, 6, 5, 5, 4, 4 };
 const int bonus_template_5[] = { 9, 9, 8, 8, 7, 7 };
@@ -23,4 +25,6 @@ const int max_bonus_tokens = 6;
 
 const int camel_token  = 5;
 const int camels_total = 11;
+
+const int winning_seals = 2;
 #endif

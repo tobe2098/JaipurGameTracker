@@ -9,14 +9,15 @@
 
 #define SAVE_FILE "jaipur_game_state.json"
 
-typedef struct player_data {
+typedef struct {
     int points;
     int camels;
     int no_bonus_tokens;
+    int no_goods_tokens;
     int seals;
-};
+} player_data;
 
-typedef struct game_data {
+typedef struct {
     char turn_of;
 
     int diamond_ptr;
@@ -36,22 +37,22 @@ typedef struct game_data {
     int bonus_5_arr[6];
 
     int finished_counter;
-};
+} game_data;
 
-void set_seed(struct game_data *game, int seed);
-void initialize_game(struct player_data *playerA, struct player_data *playerB, struct game_data *game);
-void initialize_round(struct player_data *playerA, struct player_data *playerB, struct game_data *game);
-void print_game_state(struct player_data *playerA, struct player_data *playerB, struct game_data *game);
-int  check_data_integrity(struct player_data *playerA, struct player_data *playerB, struct game_data *game);
-void set_finished_resources(struct game_data *game);
-int  load_game_state(struct player_data *playerA, struct player_data *playerB, struct game_data *game);
-void save_game_state(const struct player_data *playerA, const struct player_data *playerB, const struct game_data *game);
+void set_seed(game_data *game);
+void initialize_game(player_data *playerA, player_data *playerB, game_data *game);
+void initialize_round(player_data *playerA, player_data *playerB, game_data *game);
+void print_game_state(player_data *playerA, player_data *playerB, game_data *game);
+int  check_data_integrity(player_data *playerA, player_data *playerB, game_data *game);
+void set_finished_resources(game_data *game);
+int  load_game_state(player_data *playerA, player_data *playerB, game_data *game);
+void save_game_state(const player_data *playerA, const player_data *playerB, const game_data *game);
 void print_help();
-void process_arguments(struct player_data *playerA, struct player_data *playerB, struct game_data *game, int argc, char *argv[]);
-void card_sale(struct player_data *player, struct game_data *game, char card_type[], int no_cards);
-int  is_game_over(struct player_data *playerA, struct player_data *playerB, struct game_data *game);
-int  is_round_over(struct player_data *playerA, struct player_data *playerB, struct game_data *game);
-void game_over(struct player_data *playerA, struct player_data *playerB, struct game_data *game);
-void round_over(struct player_data *playerA, struct player_data *playerB, struct game_data *game);
+void process_arguments(player_data *playerA, player_data *playerB, game_data *game, int argc, char *argv[]);
+void card_sale(player_data *player, game_data *game, char card_type[], int no_cards);
+int  is_game_over(player_data *playerA, player_data *playerB, game_data *game);
+int  is_round_over(player_data *playerA, player_data *playerB, game_data *game);
+void game_over(player_data *playerA, player_data *playerB, game_data *game);
+void round_over(player_data *playerA, player_data *playerB, game_data *game);
 
 #endif
