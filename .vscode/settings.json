@@ -1,8 +1,0 @@
-{
-    "files.associations": {
-        "stdlib.h": "c",
-        "game_data.h": "c",
-        "stdio.h": "c",
-        "utils.h": "c"
-    },
-}
