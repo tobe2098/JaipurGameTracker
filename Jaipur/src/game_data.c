@@ -97,11 +97,21 @@ void initialize_round(struct player_data *playerA, struct player_data *playerB, 
   fprintf("Player %c starts this game.\n", game->turn_of);
 }
 void print_game_state(struct player_data *playerA, struct player_data *playerB, struct game_data *game) {
-  printf("Player A->Points:%i,Camels:%i,Bonus tokens:%i");
-  printf("Player A:");
-  printf("Player A:");
-  printf("Player A:");
-  printf("Player A:");
+  printf("Player A-> Points:%i, Camels:%i, Bonus tokens:%i, Seals of excellence:%i\n", playerA->points, playerA->camels,
+         playerA->no_bonus_tokens, playerA->seals);
+  printf("Player B-> Points:%i, Camels:%i, Bonus tokens:%i, Seals of excellence:%i\n", playerA->points, playerA->camels,
+         playerA->no_bonus_tokens, playerA->seals);
+
+  print_array_goods("diamonds", diamond_tokens, diamond_t_size, game->diamond_ptr);
+  print_array_goods("gold", gold_tokens, gold_t_size, game->gold_ptr);
+  print_array_goods("silver", silver_tokens, silver_t_size, game->silver_ptr);
+  print_array_goods("spice", spice_tokens, spice_t_size, game->spice_ptr);
+  print_array_goods("cloth", cloth_tokens, cloth_t_size, game->cloth_ptr);
+  print_array_goods("leather", leather_tokens, leather_t_size, game->leather_ptr);
+
+  printf("Remaining 3 card bonus tokens: %i\n", max_bonus_tokens - game->bonus_3_ptr);
+  printf("Remaining 4 card bonus tokens: %i\n", max_bonus_tokens - game->bonus_4_ptr);
+  printf("Remaining 5 card bonus tokens: %i\n", max_bonus_tokens - game->bonus_5_ptr);
   printf("It is player %c's turn now.\n", game->turn_of);
 }
 int check_data_integrity(struct player_data *playerA, struct player_data *playerB, struct game_data *game) {
@@ -224,19 +234,24 @@ void print_help() {
   printf("Options:\n");
   printf("  --help                        Show this help message\n");
   printf("  --reset                       Restart the game\n");
+  printf("  --round                       End the current round due to the draw pile running out.\n");
   printf("  --state                       Print the current state of the game. Default argument.\n");
   printf("  --market                      Take a non-camel market action, passing the turn\n");
-  printf("  --camels <value>              Add the specified number of camels to your herd\n");
+  printf("  --camels <value>              Add a positive or negative number of camels to your herd\n");
   printf("                                Example: --camels 3\n");
   printf("  --sell <type> <value>         Sell a number of goods of the specified type\n");
   printf("                                Example: --sell diamonds 3\n");
+  printf("Notes on rules:\n");
+  printf("1. The game ends when there are no cards left in the draw pile or the tokens of three resources are finished\n");
+  printf("2. Cards from hand and from the herd can be traded with the market\n");
 }
 void process_arguments(struct player_data *playerA, struct player_data *playerB, struct game_data *game, int argc, char *argv[]) {
   if (argc < 2) {
     print_game_state(playerA, playerB, game);
     return;
   }
-  int                 turn_happened = 0;
+  int                 turn_happened   = 0;
+  int                 round_over_bool = 0;
   struct player_data *curr_player;
   if (game->turn_of == 'A') {
     curr_player = playerA;
@@ -254,7 +269,7 @@ void process_arguments(struct player_data *playerA, struct player_data *playerB,
       return;
     }
     int camels = atoi(argv[2]);
-    if (camels < 1 || (playerA->camels + playerB->camels + camels > 11)) {
+    if (camels * -1 > curr_player->camels || (playerA->camels + playerB->camels + camels > 11)) {
       printf("Invalid number of camels.\n");
       return;
     }
@@ -275,6 +290,8 @@ void process_arguments(struct player_data *playerA, struct player_data *playerB,
     print_game_state(playerA, playerB, game);
   } else if (strncmp(argv[1], "--reset", 7) == 0) {
     initialize_game(playerA, playerB, game);
+  } else if (strncmp(argv[1], "--round", 7) == 0) {
+    round_over_bool = 1;
   } else if (strncmp(argv[1], "--help", 6) == 0) {
     print_help();
   } else {
@@ -283,7 +300,7 @@ void process_arguments(struct player_data *playerA, struct player_data *playerB,
   if (turn_happened) {
     game->turn_of = (((game->turn_of - 'A') + 1) & 1) + 'A';
   }
-  if (is_round_over(playerA, playerB, game)) {
+  if (round_over_bool || is_round_over(playerA, playerB, game)) {
     round_over(playerA, playerB, game);
     initialize_round(playerA, playerB, game);
   } else {
@@ -307,4 +324,10 @@ int is_round_over(struct player_data *playerA, struct player_data *playerB, stru
 
 void game_over(struct player_data *playerA, struct player_data *playerB, struct game_data *game) { }
 
-void round_over(struct player_data *playerA, struct player_data *playerB, struct game_data *game) { }
+void round_over(struct player_data *playerA, struct player_data *playerB, struct game_data *game) {
+  if (playerA->camels > playerB->camels) {
+    playerA->points += camel_token;
+  } else if (playerB->camels > playerA->camels) {
+    playerB->camels += camel_token;
+  }
+}
