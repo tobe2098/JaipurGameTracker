@@ -9,3 +9,15 @@ void randomize_index_array(int arr[], int size) {
     arr[j]   = temp;
   }
 }
+
+void print_array_goods(char* name, int* array, int size, int cutoff) {
+  printf("Remaining %s tokens: ", name);
+  for (int i = 0; i < size; i++) {
+    if (i < cutoff) {
+      printf(" * ");  // Three spaces
+    } else {
+      printf(" %i ", array[i]);
+    }
+  }
+  printf("\n");
+}
