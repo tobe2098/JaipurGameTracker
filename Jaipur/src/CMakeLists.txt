@@ -7,7 +7,6 @@ set(CMAKE_C_FLAGS_DEBUG "-g -O0")
 # Set flags specifically for Release builds
 set(CMAKE_C_FLAGS_RELEASE "-O3 -DNDEBUG")
 
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin/)
 
 # Add executable target
 add_executable(jaipur
