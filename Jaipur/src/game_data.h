@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define SAVE_FILE "jaipur_game_state.json"
+#define SAVE_FILE "../data/jaipur_game_state.json"
 
 typedef struct {
     int points;
