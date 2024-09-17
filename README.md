@@ -16,3 +16,6 @@ Trackers for game states in C
 Alternatively, you can also do:
 1. Run `cmake -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release .` in the game folder.
 2. Run `mingw32-make`.
+
+## Linux, macOS
+- Just use cmake, make and gcc
