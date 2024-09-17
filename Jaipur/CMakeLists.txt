@@ -1,10 +1,11 @@
 cmake_minimum_required(VERSION 3.10)
 
 # Define the executable name with version
-set(EXECUTABLE_NAME "jaipur-${PROJECT_VERSION}")
 
 # Set the project name
 project(JaipurGameTracker VERSION 1.0.0)
+
+set(EXECUTABLE_NAME "jaipur-${PROJECT_VERSION}")
 
 # Set the output directory for the executable
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)

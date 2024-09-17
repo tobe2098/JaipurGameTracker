@@ -9,7 +9,7 @@ set(CMAKE_C_FLAGS_RELEASE "-O3 -DNDEBUG")
 
 
 # Add executable target
-add_executable(jaipur
+add_executable(${EXECUTABLE_NAME}
     jaipur.c          # Main file
     game_data.c       # Source files
     utils.c
@@ -17,4 +17,4 @@ add_executable(jaipur
 )
 
 # Include directories (for header files)
-target_include_directories(jaipur PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(${EXECUTABLE_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})

@@ -9,6 +9,6 @@
 
 #define OS_NAME           "Windows"
 #define COPYRIGHT         "Copyright (C) 2024 Antoni Bertolin"
-#define LICENSE_VERSION   "MIT"
+#define LICENSE_VERSION   "MIT License"
 
 #endif  // INCLUDE_GUARD
