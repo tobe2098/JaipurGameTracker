@@ -169,6 +169,14 @@ void print_welcome_message() {
   printf("╚══════╝  ╚════╝ ╚═╝  ╚═╝╚═╝ ╚═╝      ╚═════╝ ╚═╝  ╚═╝ ╚══════╝\n");
 }
 
+void print_version() {
+  printf("Jaipur Game Tracker %s\n", PROJECT_VER);
+  printf("Built for %s\n", OS_NAME);
+  printf("%s\n", LICENSE_VERSION);
+  printf("This is free software: you are free to change and redistribute it.\n");
+  printf("There is NO WARRANTY, to the extent permitted by law.\n");
+}
+
 void print_new_round_message(char player) {
   print_player_wins(player);
   printf("////////////////////////////////////////////////////////////\n");

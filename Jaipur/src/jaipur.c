@@ -4,7 +4,11 @@ int main(int argc, char *argv[]) {
   if (argc == 2 && strncmp(argv[1], "--help", 6) == 0) {
     print_help();
     return 0;
+  } else if (argc == 2 && strncmp(argv[1], "--version", 9) == 0) {
+    print_version();
+    return 0;
   }
+
   player_data playerA, playerB;
   game_data   game;
   game.was_initialized = 0;
