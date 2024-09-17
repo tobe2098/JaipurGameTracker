@@ -19,6 +19,7 @@ void set_seed(game_data *game) {
 }
 void initialize_game(player_data *playerA, player_data *playerB, game_data *game) {
   // Optionally set the random seed in the system
+  print_welcome_message();
   playerA->no_bonus_tokens = 0;
   playerA->no_goods_tokens = 0;
   playerA->camels          = 0;
@@ -41,7 +42,7 @@ void initialize_game(player_data *playerA, player_data *playerB, game_data *game
   game->bonus_4_ptr = 0;
   game->bonus_5_ptr = 0;
 
-  printf("Enter a random seed (or press Enter to use default seed 42): ");
+  printf(">>> Enter a random seed for the next round: ");
 
   char input[20];
   if (fgets(input, sizeof(input), stdin) != NULL) {
@@ -52,14 +53,13 @@ void initialize_game(player_data *playerA, player_data *playerB, game_data *game
       game->rnd_seed = (int)(strtol(input, &endptr, 10) & INT_MAX);
       // printf("The following input was ignored: %s\n", endptr);
     }
-    printf("Seed set to: %i\n", game->rnd_seed);
+    printf(">>> Seed set to: %i\n", game->rnd_seed);
   } else {
     game->rnd_seed = 42;  // Default seed if no input
   }
   set_seed(game);
   game->turn_of = 'A' + (rand() & 1);
-  print_welcome_message();
-  printf("Player %c starts this game.\n", game->turn_of);
+  printf("<<%%> Player %c starts this round <%%>>\n", game->turn_of);
 }
 void initialize_round(player_data *playerA, player_data *playerB, game_data *game) {
   // Optionally set the random seed in the system
@@ -83,7 +83,7 @@ void initialize_round(player_data *playerA, player_data *playerB, game_data *gam
   game->bonus_4_ptr = 0;
   game->bonus_5_ptr = 0;
 
-  printf("Enter a random seed (or press Enter to use default seed 42): ");
+  printf(">>> Enter a random seed for the next round: ");
 
   char input[20];
   if (fgets(input, sizeof(input), stdin) != NULL) {
@@ -92,35 +92,38 @@ void initialize_round(player_data *playerA, player_data *playerB, game_data *gam
     } else {
       char *endptr;
       game->rnd_seed = (int)(strtol(input, &endptr, 10) & INT_MAX);
-      printf("The following input was ignored: %s\n", endptr);
+      // printf("The following input was ignored: %s\n", endptr);
     }
-    printf("Seed set to: %i\n", game->rnd_seed);
+    printf(">>> Seed set to: %i\n", game->rnd_seed);
   } else {
     game->rnd_seed = 42;  // Default seed if no input
   }
   set_seed(game);
-  print_new_round_message();
-  printf("Player %c starts this game.\n", (game->turn_of));
+  printf("<<%%> Player %c starts this round <%%>>\n", (game->turn_of));
 }
 void print_game_state(player_data *playerA, player_data *playerB, game_data *game) {
-  printf("Player A-> Points:%i, Camels:%i, Seals of excellence:%i, Bonus tokens:%i, Goods tokens:%i\n", playerA->points, playerA->camels,
+  printf("\n");
+  printf("<Scores>\n");
+  printf("<Player A> Points:%i, Camels:%i, Seals of excellence:%i, Bonus tokens:%i, Goods tokens:%i\n", playerA->points, playerA->camels,
          playerA->seals, playerA->no_bonus_tokens, playerA->no_goods_tokens);
-  printf("Player B-> Points:%i, Camels:%i, Seals of excellence:%i, Bonus tokens:%i, Goods tokens:%i\n", playerB->points, playerB->camels,
+  printf("<Player B> Points:%i, Camels:%i, Seals of excellence:%i, Bonus tokens:%i, Goods tokens:%i\n", playerB->points, playerB->camels,
          playerB->seals, playerB->no_bonus_tokens, playerB->no_goods_tokens);
-
+  printf("\n");
   print_array_goods("diamonds", diamond_tokens, diamond_t_size, game->diamond_ptr);
   print_array_goods("gold", gold_tokens, gold_t_size, game->gold_ptr);
   print_array_goods("silver", silver_tokens, silver_t_size, game->silver_ptr);
   print_array_goods("spice", spice_tokens, spice_t_size, game->spice_ptr);
   print_array_goods("cloth", cloth_tokens, cloth_t_size, game->cloth_ptr);
   print_array_goods("leather", leather_tokens, leather_t_size, game->leather_ptr);
-
-  printf("There are %i finished goods token piles\n", game->finished_counter);
-
-  printf("Remaining 3 card bonus tokens: %i\n", max_bonus_tokens - game->bonus_3_ptr);
-  printf("Remaining 4 card bonus tokens: %i\n", max_bonus_tokens - game->bonus_4_ptr);
-  printf("Remaining 5 card bonus tokens: %i\n", max_bonus_tokens - game->bonus_5_ptr);
-  printf("It is player %c's turn now.\n", game->turn_of);
+  printf("\n");
+  printf("<Bonus> Remaining 3 card bonus tokens: \t%i\n", max_bonus_tokens - game->bonus_3_ptr);
+  printf("<Bonus> Remaining 4 card bonus tokens: \t%i\n", max_bonus_tokens - game->bonus_4_ptr);
+  printf("<Bonus> Remaining 5 card bonus tokens: \t%i\n", max_bonus_tokens - game->bonus_5_ptr);
+  printf("\n");
+  printf("<Round> Finished goods token piles: \t%i \n", game->finished_counter);
+  printf("\n");
+  printf("<Turn> It is player %c's turn now <Turn>\n", game->turn_of);
+  printf("\n");
 }
 int check_data_integrity(player_data *playerA, player_data *playerB, game_data *game) {
   if (playerA->camels + playerB->camels > camels_total || playerA->camels < 0 || playerB->camels < 0) {
@@ -165,7 +168,9 @@ void set_finished_resources(game_data *game) {
   }
 }
 int load_game_state(player_data *playerA, player_data *playerB, game_data *game) {
-  FILE *file = fopen(SAVE_FILE, "r");
+  char save_file[MAX_PATH];
+  find_data_path(save_file);
+  FILE *file = fopen(save_file, "r");
 
   if (file != NULL) {
     fseek(file, 0, SEEK_END);
@@ -203,7 +208,13 @@ int load_game_state(player_data *playerA, player_data *playerB, game_data *game)
     set_seed(game);
     if (is_round_over(game)) {
       round_over(playerA, playerB, game);
-      initialize_round(playerA, playerB, game);
+      if (is_game_over(playerA, playerB)) {
+        game_over(playerA, playerB);
+        initialize_game(playerA, playerB, game);
+        game->was_initialized = 1;
+      } else {
+        initialize_round(playerA, playerB, game);
+      }
     }
     if (is_game_over(playerA, playerB)) {
       game_over(playerA, playerB);
@@ -228,7 +239,9 @@ int load_game_state(player_data *playerA, player_data *playerB, game_data *game)
   }
 }
 void save_game_state(const player_data *playerA, const player_data *playerB, const game_data *game) {
-  FILE *file = fopen(SAVE_FILE, "w");
+  char save_file[MAX_PATH];
+  find_data_path(save_file);
+  FILE *file = fopen(save_file, "w");
   if (file == NULL) {
     perror("Unable to save game state");
     return;
@@ -273,7 +286,7 @@ void print_help() {
 }
 void process_arguments(player_data *playerA, player_data *playerB, game_data *game, int argc, char *argv[]) {
   if (argc < 2) {
-    printf("Addresses A:%p B:%p\n", (void *)playerA, (void *)playerB);
+    // printf("Addresses A:%p B:%p\n", (void *)playerA, (void *)playerB);
     print_game_state(playerA, playerB, game);
     return;
   }
@@ -292,7 +305,7 @@ void process_arguments(player_data *playerA, player_data *playerB, game_data *ga
     }
     return;
   }
-  printf("Addresses A:%p B:%p, current:%p\n", (void *)playerA, (void *)playerB, (void *)curr_player);
+  // printf("Addresses A:%p B:%p, current:%p\n", (void *)playerA, (void *)playerB, (void *)curr_player);
 
   if (strncmp(argv[1], "--camels", 8) == 0) {
     if (argc < 3) {
@@ -438,28 +451,46 @@ void round_over(player_data *playerA, player_data *playerB, game_data *game) {
   if (playerA->points > playerB->points) {
     playerA->seals++;
     game->turn_of = 'B';
+    if (is_game_over(playerA, playerB) == 0) {
+      print_new_round_message('A');
+    }
     return;
   } else if (playerA->points < playerB->points) {
     playerB->seals++;
     game->turn_of = 'A';
+    if (is_game_over(playerA, playerB) == 0) {
+      print_new_round_message('B');
+    }
     return;
   }
   if (playerA->no_bonus_tokens > playerB->no_bonus_tokens) {
     playerA->seals++;
     game->turn_of = 'B';
+    if (is_game_over(playerA, playerB) == 0) {
+      print_new_round_message('A');
+    }
     return;
   } else if (playerA->no_bonus_tokens < playerB->no_bonus_tokens) {
     playerB->seals++;
     game->turn_of = 'A';
+    if (is_game_over(playerA, playerB) == 0) {
+      print_new_round_message('B');
+    }
     return;
   }
   if (playerA->no_goods_tokens > playerB->no_goods_tokens) {
     playerA->seals++;
     game->turn_of = 'B';
+    if (is_game_over(playerA, playerB) == 0) {
+      print_new_round_message('A');
+    }
     return;
   } else if (playerA->no_goods_tokens < playerB->no_goods_tokens) {
     playerB->seals++;
     game->turn_of = 'A';
+    if (is_game_over(playerA, playerB) == 0) {
+      print_new_round_message('B');
+    }
     return;
   }
   printf("ERROR: IT WAS A DRAW! CONGRATULATIONS! THIS IS NORMALLY IMPOSSIBLE\n");

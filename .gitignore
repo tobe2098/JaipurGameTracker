@@ -85,3 +85,8 @@ Jaipur/src/CMakeFiles/progress.marks
 Jaipur/src/Makefile
 Jaipur/src/jaipur_game_state.json
 .vscode/settings.json
+Jaipur/.ninja_deps
+Jaipur/.ninja_log
+Jaipur/build.ninja
+/Jaipur/CMakeFiles
+/Jaipur/src/CMakeFiles
