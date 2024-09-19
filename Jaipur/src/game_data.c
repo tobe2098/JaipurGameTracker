@@ -42,7 +42,7 @@ void initialize_game(player_data *playerA, player_data *playerB, game_data *game
   game->bonus_4_ptr = 0;
   game->bonus_5_ptr = 0;
 
-  printf(">>> Enter a random seed for the next round: ");
+  printf("<Seed> Enter a random seed for the next round: ");
 
   char input[20];
   if (fgets(input, sizeof(input), stdin) != NULL) {
@@ -53,13 +53,13 @@ void initialize_game(player_data *playerA, player_data *playerB, game_data *game
       game->rnd_seed = (int)(strtol(input, &endptr, 10) & INT_MAX);
       // printf("The following input was ignored: %s\n", endptr);
     }
-    printf(">>> Seed set to: %i\n", game->rnd_seed);
+    printf("<Seed> Seed set to: %i\n", game->rnd_seed);
   } else {
     game->rnd_seed = 42;  // Default seed if no input
   }
   set_seed(game);
   game->turn_of = 'A' + (rand() & 1);
-  printf("<<%%> Player %c starts this round <%%>>\n", game->turn_of);
+  printf("<Turn> Player %c starts this round <Turn>\n", game->turn_of);
 }
 void initialize_round(player_data *playerA, player_data *playerB, game_data *game) {
   // Optionally set the random seed in the system
@@ -83,7 +83,7 @@ void initialize_round(player_data *playerA, player_data *playerB, game_data *gam
   game->bonus_4_ptr = 0;
   game->bonus_5_ptr = 0;
 
-  printf(">>> Enter a random seed for the next round: ");
+  printf("<Seed> Enter a random seed for the next round: ");
 
   char input[20];
   if (fgets(input, sizeof(input), stdin) != NULL) {
@@ -94,12 +94,12 @@ void initialize_round(player_data *playerA, player_data *playerB, game_data *gam
       game->rnd_seed = (int)(strtol(input, &endptr, 10) & INT_MAX);
       // printf("The following input was ignored: %s\n", endptr);
     }
-    printf(">>> Seed set to: %i\n", game->rnd_seed);
+    printf("<Seed> Seed set to: %i\n", game->rnd_seed);
   } else {
     game->rnd_seed = 42;  // Default seed if no input
   }
   set_seed(game);
-  printf("<<%%> Player %c starts this round <%%>>\n", (game->turn_of));
+  printf("<Turn> Player %c starts this round <Turn>\n", (game->turn_of));
 }
 void print_game_state(player_data *playerA, player_data *playerB, game_data *game) {
   printf("\n");
