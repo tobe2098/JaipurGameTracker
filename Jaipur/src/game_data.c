@@ -178,7 +178,11 @@ int load_game_state(player_data *playerA, player_data *playerB, game_data *game)
     rewind(file);
 
     char *buffer = (char *)malloc(file_size + 1);
-    fread(buffer, 1, file_size, file);
+    int counted_size=fread(buffer, 1, file_size, file);
+    if(counted_size!=file_size){
+      free(buffer);
+      return -1;
+    }
     buffer[file_size] = '\0';
     fclose(file);
     // printf("Buffer 1 content:\n%s\n", buffer);

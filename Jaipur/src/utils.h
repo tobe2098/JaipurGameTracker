@@ -10,11 +10,11 @@
 #if defined(_WIN32) || defined(WIN32)
 #include <windows.h>
 #elif defined(__linux__) || defined(__APPLE__)
-#include < limits.h>
+#include <limits.h>
 #include <unistd.h>
 #define MAX_PATH PATH_MAX
 #elif defined(__APPLE__)
-#include < limits.h>
+#include <limits.h>
 #include <mach-o/dyld.h>
 #include <unistd.h>
 #define MAX_PATH PATH_MAX
