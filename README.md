@@ -1,5 +1,5 @@
-# GameStateTrackers
-Trackers for game states in C
+# Jaipur Game State Tracker
+Jaipur tracker for game states in C
 
 # Building and running
 ## Windows
