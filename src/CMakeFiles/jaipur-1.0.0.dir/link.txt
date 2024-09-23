@@ -1,3 +1,0 @@
-C:\msys64\mingw64\bin\cmake.exe -E rm -f CMakeFiles\jaipur-1.0.0.dir/objects.a
-C:\msys64\mingw64\bin\ar.exe qc CMakeFiles\jaipur-1.0.0.dir/objects.a @CMakeFiles\jaipur-1.0.0.dir\objects1.rsp
-C:\msys64\mingw64\bin\cc.exe -Wall -Wextra -pedantic -O3 -DNDEBUG -Wl,--whole-archive CMakeFiles\jaipur-1.0.0.dir/objects.a -Wl,--no-whole-archive -o ..\bin\jaipur-1.0.0.exe -Wl,--out-implib,libjaipur-1.0.0.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\jaipur-1.0.0.dir\linkLibs.rsp

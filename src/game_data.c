@@ -169,7 +169,7 @@ void set_finished_resources(game_data *game) {
 }
 int load_game_state(player_data *playerA, player_data *playerB, game_data *game) {
   char save_file[MAX_PATH];
-  find_data_path(save_file);
+  if (find_data_path(save_file)==-1) return -1;
   FILE *file = fopen(save_file, "r");
 
   if (file != NULL) {

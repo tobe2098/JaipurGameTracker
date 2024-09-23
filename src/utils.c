@@ -52,7 +52,7 @@ void print_player_wins(char player) {
     printf("      ╚═════╝      ╚══╝╚══╝ ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝        \n");
   }
 }
-void find_data_path(char* data_path) {
+int find_data_path(char* data_path) {
   char exe_path[MAX_PATH];
   int  size = sizeof(exe_path);
   // Function to get the executable path based on the operating system
@@ -98,12 +98,20 @@ void find_data_path(char* data_path) {
   }
 
 #endif
+size_t wlen=strlen(exe_path);
+if (wlen + 31 >= MAX_PATH) {
+    fprintf(stderr, "Path too long!\n");
+    return -1;  // Handle the error case
+}
   // Construct the relative path to the file
 #ifdef _WIN32
-  snprintf(data_path, MAX_PATH, "%s\\..\\data\\jaipur_game_state.json", exe_path);
+  strncpy(data_path, exe_path, MAX_PATH);
+  strncat(data_path, "\\..\\data\\jaipur_game_state.json", MAX_PATH - wlen - 1);
 #else
-  snprintf(data_path, MAX_PATH, "%s/../data/jaipur_game_state.json", exe_path);
+  strncpy(data_path, exe_path, MAX_PATH);
+  strncat(data_path, "%s/../data/jaipur_game_state.json", MAX_PATH - len - 1);
 #endif
+  return 0;
 }
 void print_winning_trophy(char player) {
   printf("                        xxxxxxXXXxxxXx                         \n");

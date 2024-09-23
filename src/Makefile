@@ -47,19 +47,19 @@ cmake_force:
 SHELL = cmd.exe
 
 # The CMake executable.
-CMAKE_COMMAND = C:\msys64\mingw64\bin\cmake.exe
+CMAKE_COMMAND = C:\msys64\ucrt64\bin\cmake.exe
 
 # The command to remove a file.
-RM = C:\msys64\mingw64\bin\cmake.exe -E rm -f
+RM = C:\msys64\ucrt64\bin\cmake.exe -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\anton\Desktop\PhD_WL\Code_indrepos\GameStateTrackers\Jaipur
+CMAKE_SOURCE_DIR = C:\Users\anton\Desktop\PhD_WL\Code_indrepos\JaipurGameTracker
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\anton\Desktop\PhD_WL\Code_indrepos\GameStateTrackers\Jaipur
+CMAKE_BINARY_DIR = C:\Users\anton\Desktop\PhD_WL\Code_indrepos\JaipurGameTracker
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -67,7 +67,7 @@ CMAKE_BINARY_DIR = C:\Users\anton\Desktop\PhD_WL\Code_indrepos\GameStateTrackers
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "No interactive CMake dialog available..."
-	C:\msys64\mingw64\bin\cmake.exe -E echo "No interactive CMake dialog available."
+	C:\msys64\ucrt64\bin\cmake.exe -E echo "No interactive CMake dialog available."
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -77,7 +77,7 @@ edit_cache/fast: edit_cache
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Running CMake to regenerate build system..."
-	C:\msys64\mingw64\bin\cmake.exe --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	C:\msys64\ucrt64\bin\cmake.exe --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -86,14 +86,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /d C:\Users\anton\Desktop\PhD_WL\Code_indrepos\GameStateTrackers\Jaipur && $(CMAKE_COMMAND) -E cmake_progress_start C:\Users\anton\Desktop\PhD_WL\Code_indrepos\GameStateTrackers\Jaipur\CMakeFiles C:\Users\anton\Desktop\PhD_WL\Code_indrepos\GameStateTrackers\Jaipur\src\\CMakeFiles\progress.marks
-	cd /d C:\Users\anton\Desktop\PhD_WL\Code_indrepos\GameStateTrackers\Jaipur && $(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 src/all
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\anton\Desktop\PhD_WL\Code_indrepos\GameStateTrackers\Jaipur\CMakeFiles 0
+	cd /d C:\Users\anton\Desktop\PhD_WL\Code_indrepos\JaipurGameTracker && $(CMAKE_COMMAND) -E cmake_progress_start C:\Users\anton\Desktop\PhD_WL\Code_indrepos\JaipurGameTracker\CMakeFiles C:\Users\anton\Desktop\PhD_WL\Code_indrepos\JaipurGameTracker\src\\CMakeFiles\progress.marks
+	cd /d C:\Users\anton\Desktop\PhD_WL\Code_indrepos\JaipurGameTracker && $(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 src/all
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\anton\Desktop\PhD_WL\Code_indrepos\JaipurGameTracker\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /d C:\Users\anton\Desktop\PhD_WL\Code_indrepos\GameStateTrackers\Jaipur && $(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 src/clean
+	cd /d C:\Users\anton\Desktop\PhD_WL\Code_indrepos\JaipurGameTracker && $(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 src/clean
 .PHONY : clean
 
 # The main clean target
@@ -102,22 +102,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /d C:\Users\anton\Desktop\PhD_WL\Code_indrepos\GameStateTrackers\Jaipur && $(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 src/preinstall
+	cd /d C:\Users\anton\Desktop\PhD_WL\Code_indrepos\JaipurGameTracker && $(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 src/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /d C:\Users\anton\Desktop\PhD_WL\Code_indrepos\GameStateTrackers\Jaipur && $(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 src/preinstall
+	cd /d C:\Users\anton\Desktop\PhD_WL\Code_indrepos\JaipurGameTracker && $(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 src/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /d C:\Users\anton\Desktop\PhD_WL\Code_indrepos\GameStateTrackers\Jaipur && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 1
+	cd /d C:\Users\anton\Desktop\PhD_WL\Code_indrepos\JaipurGameTracker && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 src/CMakeFiles/jaipur-1.0.0.dir/rule:
-	cd /d C:\Users\anton\Desktop\PhD_WL\Code_indrepos\GameStateTrackers\Jaipur && $(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 src/CMakeFiles/jaipur-1.0.0.dir/rule
+	cd /d C:\Users\anton\Desktop\PhD_WL\Code_indrepos\JaipurGameTracker && $(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 src/CMakeFiles/jaipur-1.0.0.dir/rule
 .PHONY : src/CMakeFiles/jaipur-1.0.0.dir/rule
 
 # Convenience name for target.
@@ -126,7 +126,7 @@ jaipur-1.0.0: src/CMakeFiles/jaipur-1.0.0.dir/rule
 
 # fast build rule for target.
 jaipur-1.0.0/fast:
-	cd /d C:\Users\anton\Desktop\PhD_WL\Code_indrepos\GameStateTrackers\Jaipur && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\jaipur-1.0.0.dir\build.make src/CMakeFiles/jaipur-1.0.0.dir/build
+	cd /d C:\Users\anton\Desktop\PhD_WL\Code_indrepos\JaipurGameTracker && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\jaipur-1.0.0.dir\build.make src/CMakeFiles/jaipur-1.0.0.dir/build
 .PHONY : jaipur-1.0.0/fast
 
 game_constants.obj: game_constants.c.obj
@@ -134,7 +134,7 @@ game_constants.obj: game_constants.c.obj
 
 # target to build an object file
 game_constants.c.obj:
-	cd /d C:\Users\anton\Desktop\PhD_WL\Code_indrepos\GameStateTrackers\Jaipur && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\jaipur-1.0.0.dir\build.make src/CMakeFiles/jaipur-1.0.0.dir/game_constants.c.obj
+	cd /d C:\Users\anton\Desktop\PhD_WL\Code_indrepos\JaipurGameTracker && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\jaipur-1.0.0.dir\build.make src/CMakeFiles/jaipur-1.0.0.dir/game_constants.c.obj
 .PHONY : game_constants.c.obj
 
 game_constants.i: game_constants.c.i
@@ -142,7 +142,7 @@ game_constants.i: game_constants.c.i
 
 # target to preprocess a source file
 game_constants.c.i:
-	cd /d C:\Users\anton\Desktop\PhD_WL\Code_indrepos\GameStateTrackers\Jaipur && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\jaipur-1.0.0.dir\build.make src/CMakeFiles/jaipur-1.0.0.dir/game_constants.c.i
+	cd /d C:\Users\anton\Desktop\PhD_WL\Code_indrepos\JaipurGameTracker && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\jaipur-1.0.0.dir\build.make src/CMakeFiles/jaipur-1.0.0.dir/game_constants.c.i
 .PHONY : game_constants.c.i
 
 game_constants.s: game_constants.c.s
@@ -150,7 +150,7 @@ game_constants.s: game_constants.c.s
 
 # target to generate assembly for a file
 game_constants.c.s:
-	cd /d C:\Users\anton\Desktop\PhD_WL\Code_indrepos\GameStateTrackers\Jaipur && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\jaipur-1.0.0.dir\build.make src/CMakeFiles/jaipur-1.0.0.dir/game_constants.c.s
+	cd /d C:\Users\anton\Desktop\PhD_WL\Code_indrepos\JaipurGameTracker && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\jaipur-1.0.0.dir\build.make src/CMakeFiles/jaipur-1.0.0.dir/game_constants.c.s
 .PHONY : game_constants.c.s
 
 game_data.obj: game_data.c.obj
@@ -158,7 +158,7 @@ game_data.obj: game_data.c.obj
 
 # target to build an object file
 game_data.c.obj:
-	cd /d C:\Users\anton\Desktop\PhD_WL\Code_indrepos\GameStateTrackers\Jaipur && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\jaipur-1.0.0.dir\build.make src/CMakeFiles/jaipur-1.0.0.dir/game_data.c.obj
+	cd /d C:\Users\anton\Desktop\PhD_WL\Code_indrepos\JaipurGameTracker && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\jaipur-1.0.0.dir\build.make src/CMakeFiles/jaipur-1.0.0.dir/game_data.c.obj
 .PHONY : game_data.c.obj
 
 game_data.i: game_data.c.i
@@ -166,7 +166,7 @@ game_data.i: game_data.c.i
 
 # target to preprocess a source file
 game_data.c.i:
-	cd /d C:\Users\anton\Desktop\PhD_WL\Code_indrepos\GameStateTrackers\Jaipur && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\jaipur-1.0.0.dir\build.make src/CMakeFiles/jaipur-1.0.0.dir/game_data.c.i
+	cd /d C:\Users\anton\Desktop\PhD_WL\Code_indrepos\JaipurGameTracker && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\jaipur-1.0.0.dir\build.make src/CMakeFiles/jaipur-1.0.0.dir/game_data.c.i
 .PHONY : game_data.c.i
 
 game_data.s: game_data.c.s
@@ -174,7 +174,7 @@ game_data.s: game_data.c.s
 
 # target to generate assembly for a file
 game_data.c.s:
-	cd /d C:\Users\anton\Desktop\PhD_WL\Code_indrepos\GameStateTrackers\Jaipur && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\jaipur-1.0.0.dir\build.make src/CMakeFiles/jaipur-1.0.0.dir/game_data.c.s
+	cd /d C:\Users\anton\Desktop\PhD_WL\Code_indrepos\JaipurGameTracker && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\jaipur-1.0.0.dir\build.make src/CMakeFiles/jaipur-1.0.0.dir/game_data.c.s
 .PHONY : game_data.c.s
 
 jaipur.obj: jaipur.c.obj
@@ -182,7 +182,7 @@ jaipur.obj: jaipur.c.obj
 
 # target to build an object file
 jaipur.c.obj:
-	cd /d C:\Users\anton\Desktop\PhD_WL\Code_indrepos\GameStateTrackers\Jaipur && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\jaipur-1.0.0.dir\build.make src/CMakeFiles/jaipur-1.0.0.dir/jaipur.c.obj
+	cd /d C:\Users\anton\Desktop\PhD_WL\Code_indrepos\JaipurGameTracker && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\jaipur-1.0.0.dir\build.make src/CMakeFiles/jaipur-1.0.0.dir/jaipur.c.obj
 .PHONY : jaipur.c.obj
 
 jaipur.i: jaipur.c.i
@@ -190,7 +190,7 @@ jaipur.i: jaipur.c.i
 
 # target to preprocess a source file
 jaipur.c.i:
-	cd /d C:\Users\anton\Desktop\PhD_WL\Code_indrepos\GameStateTrackers\Jaipur && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\jaipur-1.0.0.dir\build.make src/CMakeFiles/jaipur-1.0.0.dir/jaipur.c.i
+	cd /d C:\Users\anton\Desktop\PhD_WL\Code_indrepos\JaipurGameTracker && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\jaipur-1.0.0.dir\build.make src/CMakeFiles/jaipur-1.0.0.dir/jaipur.c.i
 .PHONY : jaipur.c.i
 
 jaipur.s: jaipur.c.s
@@ -198,7 +198,7 @@ jaipur.s: jaipur.c.s
 
 # target to generate assembly for a file
 jaipur.c.s:
-	cd /d C:\Users\anton\Desktop\PhD_WL\Code_indrepos\GameStateTrackers\Jaipur && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\jaipur-1.0.0.dir\build.make src/CMakeFiles/jaipur-1.0.0.dir/jaipur.c.s
+	cd /d C:\Users\anton\Desktop\PhD_WL\Code_indrepos\JaipurGameTracker && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\jaipur-1.0.0.dir\build.make src/CMakeFiles/jaipur-1.0.0.dir/jaipur.c.s
 .PHONY : jaipur.c.s
 
 utils.obj: utils.c.obj
@@ -206,7 +206,7 @@ utils.obj: utils.c.obj
 
 # target to build an object file
 utils.c.obj:
-	cd /d C:\Users\anton\Desktop\PhD_WL\Code_indrepos\GameStateTrackers\Jaipur && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\jaipur-1.0.0.dir\build.make src/CMakeFiles/jaipur-1.0.0.dir/utils.c.obj
+	cd /d C:\Users\anton\Desktop\PhD_WL\Code_indrepos\JaipurGameTracker && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\jaipur-1.0.0.dir\build.make src/CMakeFiles/jaipur-1.0.0.dir/utils.c.obj
 .PHONY : utils.c.obj
 
 utils.i: utils.c.i
@@ -214,7 +214,7 @@ utils.i: utils.c.i
 
 # target to preprocess a source file
 utils.c.i:
-	cd /d C:\Users\anton\Desktop\PhD_WL\Code_indrepos\GameStateTrackers\Jaipur && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\jaipur-1.0.0.dir\build.make src/CMakeFiles/jaipur-1.0.0.dir/utils.c.i
+	cd /d C:\Users\anton\Desktop\PhD_WL\Code_indrepos\JaipurGameTracker && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\jaipur-1.0.0.dir\build.make src/CMakeFiles/jaipur-1.0.0.dir/utils.c.i
 .PHONY : utils.c.i
 
 utils.s: utils.c.s
@@ -222,7 +222,7 @@ utils.s: utils.c.s
 
 # target to generate assembly for a file
 utils.c.s:
-	cd /d C:\Users\anton\Desktop\PhD_WL\Code_indrepos\GameStateTrackers\Jaipur && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\jaipur-1.0.0.dir\build.make src/CMakeFiles/jaipur-1.0.0.dir/utils.c.s
+	cd /d C:\Users\anton\Desktop\PhD_WL\Code_indrepos\JaipurGameTracker && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\jaipur-1.0.0.dir\build.make src/CMakeFiles/jaipur-1.0.0.dir/utils.c.s
 .PHONY : utils.c.s
 
 # Help Target
@@ -257,6 +257,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /d C:\Users\anton\Desktop\PhD_WL\Code_indrepos\GameStateTrackers\Jaipur && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 0
+	cd /d C:\Users\anton\Desktop\PhD_WL\Code_indrepos\JaipurGameTracker && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

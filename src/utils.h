@@ -26,5 +26,5 @@ void print_welcome_message();
 void print_version();
 void print_new_round_message(char player);
 void print_player_wins(char player);
-void find_data_path(char* data_path);
+int find_data_path(char* data_path);
 #endif

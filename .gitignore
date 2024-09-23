@@ -84,3 +84,7 @@ Jaipur/build.ninja
 /Jaipur/CMakeFiles
 /Jaipur/src/CMakeFiles
 Jaipur/data/jaipur_game_state.json
+src/cmake_install.cmake
+/CMakeFiles
+/src/CMakeFiles
+CMakeCache.txt
