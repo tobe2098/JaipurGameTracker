@@ -247,7 +247,7 @@ int load_game_state(player_data *playerA, player_data *playerB, game_data *game)
 void save_game_state(const player_data *playerA, const player_data *playerB, const game_data *game) {
   char save_file[MAX_PATH];
   find_data_path(save_file);
-  FILE *file = fopen(save_file, "w");
+  FILE *file = fopen(save_file, "wb");
   if (file == NULL) {
     perror("Unable to save game state");
     return;
