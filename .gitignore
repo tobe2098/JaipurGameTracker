@@ -88,3 +88,4 @@ src/cmake_install.cmake
 /CMakeFiles
 /src/CMakeFiles
 CMakeCache.txt
+data/jaipur_game_state.json

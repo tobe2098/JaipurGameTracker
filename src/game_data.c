@@ -170,7 +170,7 @@ void set_finished_resources(game_data *game) {
 int load_game_state(player_data *playerA, player_data *playerB, game_data *game) {
   char save_file[MAX_PATH];
   if (find_data_path(save_file)==-1) return -1;
-  FILE *file = fopen(save_file, "r");
+  FILE *file = fopen(save_file, "rb");
 
   if (file != NULL) {
     fseek(file, 0, SEEK_END);
@@ -180,6 +180,8 @@ int load_game_state(player_data *playerA, player_data *playerB, game_data *game)
     char *buffer = (char *)malloc(file_size + 1);
     int counted_size=fread(buffer, 1, file_size, file);
     if(counted_size!=file_size){
+      printf("File size and fread size do not match\n");
+
       free(buffer);
       return -1;
     }

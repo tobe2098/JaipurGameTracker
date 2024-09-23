@@ -4,10 +4,18 @@ Jaipur tracker for game states in C without tracking the card aspect of the game
 # Building and running
 ## Windows
 - If using Windows, you can use the executable directly (`./bin/` folder) or install Powershell, msys2, ninja, and compile it yourself.
-### MSYS2
+
 1. Install Powershell and msys2.
+### msvcrt C library
 2. Inside the mingw64 terminal, install ninja (```pacman -S mingw-w64-x86_64-ninja```), cmake (`pacman -S mingw-w64-x86_64-cmake `) and the toolchain (`pacman -S mingw-w64-x86_64-toolchain`).
-3. Add to the environment variable Path the path to the mingw64 binaries(`.../mingw64/bin`).
+3. Add to the environment variable Path the path to the mingw64 binaries(`...\msys64\mingw64\bin`).
+
+### ucrt C library
+
+2. Inside the mingw64 terminal, install ninja (```pacman -S mingw-w64-ucrt-x86_64-ninja```), cmake (`pacman -S mingw-w64-ucrt-x86_64-cmake `) and the toolchain (`pacman -S mingw-w64-ucrt-x86_64-toolchain`).
+3. Add to the environment variable Path the path to the mingw64 binaries(`...\msys64\ucrt64\bin`).
+
+### For both
 4. Run `cmake -G "Ninja" -DCMAKE_BUILD_TYPE=Release .` in the game folder.
 5. Run `ninja`.
 6. The compiled binary will be in `./bin/`.

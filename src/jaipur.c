@@ -9,6 +9,7 @@ int main(int argc, char *argv[]) {
     return 0;
   }
 
+
   player_data playerA, playerB;
   game_data   game;
   game.was_initialized = 0;

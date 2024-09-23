@@ -60,6 +60,7 @@ int find_data_path(char* data_path) {
   // On Windows
   if (GetModuleFileName(NULL, exe_path, size) == 0) {
     printf("Error: Could not get executable path.\n");
+    return -1;
   }
 
   // Remove the executable name from the path
@@ -99,7 +100,7 @@ int find_data_path(char* data_path) {
 
 #endif
 size_t wlen=strlen(exe_path);
-if (wlen + 31 >= MAX_PATH) {
+if (wlen + 32 >= MAX_PATH) {
     fprintf(stderr, "Path too long!\n");
     return -1;  // Handle the error case
 }
