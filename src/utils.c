@@ -110,7 +110,7 @@ if (wlen + 32 >= MAX_PATH) {
   strncat(data_path, "\\..\\data\\jaipur_game_state.json", MAX_PATH - wlen - 1);
 #else
   strncpy(data_path, exe_path, MAX_PATH);
-  strncat(data_path, "%s/../data/jaipur_game_state.json", MAX_PATH - len - 1);
+  strncat(data_path, "/../data/jaipur_game_state.json", MAX_PATH - len - 1);
 #endif
   return 0;
 }

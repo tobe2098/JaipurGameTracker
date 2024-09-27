@@ -209,7 +209,7 @@ int load_game_state(player_data *playerA, player_data *playerB, game_data *game)
                            &playerB->no_bonus_tokens, &playerB->no_goods_tokens, &playerB->camels, &playerB->points, &playerB->seals,
                            &game->turn_of, &game->diamond_ptr, &game->gold_ptr, &game->silver_ptr, &game->spice_ptr, &game->cloth_ptr,
                            &game->leather_ptr, &game->rnd_seed, &game->bonus_3_ptr, &game->bonus_4_ptr, &game->bonus_5_ptr);
-    // printf("Items read: %d\n", itemsRead);
+    printf("Items read: %d\n", itemsRead);
     free(buffer);
     set_seed(game);
     if (is_round_over(game)) {
@@ -250,6 +250,8 @@ void save_game_state(const player_data *playerA, const player_data *playerB, con
   FILE *file = fopen(save_file, "wb");
   if (file == NULL) {
     perror("Unable to save game state");
+    save_file[MAX_PATH-1]='\0';
+    printf("%s\n",save_file);
     return;
   }
 
