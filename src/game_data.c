@@ -410,15 +410,15 @@ void card_sale(player_data *player, game_data *game, char card_type[], int no_ca
   }
   if (no_cards == 3 && game->bonus_3_ptr < max_bonus_tokens) {
     player->no_bonus_tokens++;
-    player->points += game->bonus_3_arr[game->bonus_3_ptr];
+    player->points += bonus_template_3[game->bonus_3_arr[game->bonus_3_ptr]];
     game->bonus_3_ptr++;
   } else if (no_cards == 4 && game->bonus_4_ptr < max_bonus_tokens) {
     player->no_bonus_tokens++;
-    player->points += game->bonus_4_arr[game->bonus_4_ptr];
+    player->points += bonus_template_4[game->bonus_4_arr[game->bonus_4_ptr]];
     game->bonus_4_ptr++;
   } else if (no_cards >= 5 && game->bonus_5_ptr < max_bonus_tokens) {
     player->no_bonus_tokens++;
-    player->points += game->bonus_5_arr[game->bonus_5_ptr];
+    player->points += bonus_template_5[game->bonus_5_arr[game->bonus_5_ptr]];
     game->bonus_5_ptr++;
   }
 }
