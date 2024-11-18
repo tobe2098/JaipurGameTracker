@@ -1,5 +1,5 @@
 # Jaipur Game State Tracker
-Jaipur tracker for game states in C without tracking the card aspect of the game. For use with a deck of cards to play.
+Jaipur tracker for game states in C without tracking the card aspect of the game. For use with a deck of cards to play. A better version is currently [here](https://github.com/tobe2098/JaipurEmulator).
 
 # Building and running
 ## Windows
